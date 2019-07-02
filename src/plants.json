@@ -1,0 +1,22 @@
+{
+  "snapdragon": {
+    "minutes": 80,
+    "name": "snapdragon"
+  },
+  "palm": {
+    "minutes": 960,
+    "name": "palm"
+  },
+  "calquat": {
+    "minutes": 1278,
+    "name": "calquat"
+  },
+  "mahogany": {
+    "minutes": 5120,
+    "name": "mahogany"
+  },
+  "celastrus": {
+    "minutes": 800,
+    "name": "celastrus"
+  }
+}
