@@ -3,15 +3,18 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "android": "cd ./android && ./gradlew app:assembleDebug && ./gradlew installDebug"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.5.0",
+    "braces": ">=2.3.1",
     "luxon": "^1.16.0",
     "react": "16.8.3",
     "react-native": "0.59.9",
     "react-native-elements": "^1.1.0",
-    "braces": ">=2.3.1",
+    "react-native-navigation": "^2.22.3",
+    "react-native-vector-icons": "^6.6.0",
+    "react-timer-mixin": "^0.13.4",
     "ws": ">=3.3.1"
   },
   "devDependencies": {

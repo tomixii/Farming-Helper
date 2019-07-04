@@ -6,23 +6,31 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
-import Dashboard from './src/Dashboard';
+import React, { Component } from 'react'
+import { Platform, StyleSheet, Text, View } from 'react-native'
+import Dashboard from './src/Dashboard'
+import { ThemeProvider } from 'react-native-elements'
 
-type Props = {};
-export default class App extends Component<Props> {
+const theme = {
+  colors: {
+    primary: 'green'
+  }
+}
+
+export default class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Dashboard />
-      </View>
-    );
+      <ThemeProvider theme={theme}>
+        <View style={styles.container}>
+          <Dashboard />
+        </View>
+      </ThemeProvider>
+    )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-});
+    flex: 1
+  }
+})
