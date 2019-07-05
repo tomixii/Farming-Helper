@@ -95,7 +95,7 @@ export default class Plant extends Component {
             onPress={() =>
               this.setPlantTime(this.props.data.name, DateTime.local())
             }
-            title={'plant'.toUpperCase()}
+            title={'PLANT'}
           />
         </View>
       </Card>
