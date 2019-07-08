@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StatusBar, TouchableOpacity } from 'react-native'
+import { Text, View, ScrollView, TouchableOpacity } from 'react-native'
 import PlantCard from './PlantCard'
 import plants from './plants.json'
 import AsyncStorage from '@react-native-community/async-storage'
@@ -12,12 +12,29 @@ class Dashboard extends Component {
     this.state = {}
   }
 
-  componentDidMount = async () => {
+  static navigationOptions = {
+    title: 'My Plants',
+    headerStyle: {
+      backgroundColor: '#356035'
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    }
+  }
+
+  componentDidMount = () => {
+    this.load()
+    this.props.navigation.addListener('willFocus', this.load)
+  }
+  load = async () => {
     try {
       await AsyncStorage.getItem('myPlants').then(myPlants => {
-        this.setState({
-          myPlants
-        })
+        if (myPlants) {
+          this.setState({
+            myPlants: JSON.parse(myPlants)
+          })
+        }
       })
     } catch (error) {
       console.log(error)
@@ -25,11 +42,13 @@ class Dashboard extends Component {
   }
 
   renderPlants() {
-    console.log(this.state.myPlants)
     if (this.state.myPlants) {
       let plantsInJSX = []
-      for (let plant in this.state.myPlants) {
-        plantsInJSX.push(<PlantCard key={plant.name} data={plant} />)
+      for (let key in this.state.myPlants) {
+        if (this.state.myPlants.hasOwnProperty(key)) {
+          const plant = this.state.myPlants[key]
+          plantsInJSX.push(<PlantCard key={plant.name} data={plant} />)
+        }
       }
 
       return plantsInJSX
@@ -42,8 +61,7 @@ class Dashboard extends Component {
     const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>Your plants</Text>
-        <View>{this.renderPlants()}</View>
+        <ScrollView>{this.renderPlants()}</ScrollView>
 
         <TouchableOpacity onPress={() => navigate('Plants')} style={styles.fab}>
           <Text style={styles.fabIcon}>+</Text>

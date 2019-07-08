@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Button, Dimensions } from 'react-native'
 import { DateTime, Duration } from 'luxon'
-import { Card, Button } from 'react-native-elements'
+import { Card } from 'react-native-elements'
 import AsyncStorage from '@react-native-community/async-storage'
 
 export default class Plant extends Component {
@@ -20,9 +20,8 @@ export default class Plant extends Component {
     } catch (error) {
       console.log(error)
     }
-    setInterval(() => {
+    this.updateInterval = setInterval(() => {
       if (this.state.plantTime) {
-        console.log(this.state.plantTime)
         this.setState({
           timeLeft: this.parseMillis(
             this.state.plantTime
@@ -32,6 +31,10 @@ export default class Plant extends Component {
         })
       }
     }, 1000)
+  }
+  componentWillUnmount = async () => {
+    await AsyncStorage.removeItem(this.props.data.name)
+    clearInterval(this.updateInterval)
   }
 
   setPlantTime = async (name, time) => {
@@ -52,26 +55,31 @@ export default class Plant extends Component {
   }
 
   getTimeLeft = () => {
+    let timeString = ''
     if (this.state.timeLeft) {
       const timeLeft = this.state.timeLeft
-      let timeString = ''
-      if (timeLeft.days > 1) {
-        timeString += Math.floor(timeLeft.days) + ' d '
+      if (timeLeft.seconds) {
+        if (timeLeft.seconds > 0) {
+          if (timeLeft.days > 1) {
+            timeString += Math.floor(timeLeft.days) + ' d '
+          }
+          if (timeLeft.hours > 1) {
+            timeString += (Math.floor(timeLeft.hours) % 24) + ' h '
+          }
+          if (timeLeft.minutes > 1) {
+            timeString += (Math.floor(timeLeft.minutes) % 60) + ' min '
+          }
+          timeString += (Math.floor(timeLeft.seconds) % 60) + 's'
+        } else {
+          timeString += 'READY!'
+        }
+      } else {
+        timeString += 'NOT PLANTED'
       }
-      if (timeLeft.hours > 1) {
-        timeString += (Math.floor(timeLeft.hours) % 24) + ' h '
-      }
-      if (timeLeft.minutes > 1) {
-        timeString += (Math.floor(timeLeft.minutes) % 60) + ' min '
-      }
-      if (timeLeft.seconds > 1) {
-        timeString += (Math.floor(timeLeft.seconds) % 60) + 's'
-      }
-
-      return timeString
     } else {
-      return 'NOT PLANTED'
+      timeString += 'NOT PLANTED'
     }
+    return timeString
   }
 
   capitalize = str => {
@@ -81,7 +89,7 @@ export default class Plant extends Component {
   render() {
     const { container, plantButton, nameText, timeText } = styles
     return (
-      <Card>
+      <Card containerStyle={{ width: Dimensions.get('window').width - 30 }}>
         <View style={container}>
           <View>
             <Text style={nameText}>
@@ -90,8 +98,8 @@ export default class Plant extends Component {
             <Text style={timeText}>{this.getTimeLeft()}</Text>
           </View>
           <Button
-            buttonStyle={plantButton}
-            color="#00FF00"
+            style={plantButton}
+            color="#356035"
             onPress={() =>
               this.setPlantTime(this.props.data.name, DateTime.local())
             }
@@ -106,7 +114,7 @@ export default class Plant extends Component {
 const styles = {
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-between'
   },
   nameText: {
     fontSize: 20,

@@ -93,6 +93,8 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableProguardInReleaseBuilds = false
 
+def pass = getPassword("YOUR_USER_NAME","android_keystore")
+
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
@@ -108,6 +110,14 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    signingConfigs {
+        release {
+            storeFile file(MYAPP_RELEASE_STORE_FILE)
+            storePassword pass // Change this
+            keyAlias MYAPP_RELEASE_KEY_ALIAS
+            keyPassword pass // Change this
+        }
+    }
     splits {
         abi {
             reset()
@@ -120,6 +130,7 @@ android {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release

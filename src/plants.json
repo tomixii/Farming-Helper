@@ -18,5 +18,9 @@
   "celastrus": {
     "minutes": 800,
     "name": "celastrus"
+  },
+  "testikasvi": {
+    "minutes": 1,
+    "name": "testikasvi"
   }
 }

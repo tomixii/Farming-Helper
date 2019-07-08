@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, Button } from 'react-native'
 import plants from './plants.json'
 import { Searchbar } from 'react-native-paper'
 import { CheckBox } from 'react-native-elements'
@@ -9,7 +9,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 class Plants extends Component {
   constructor(props) {
     super(props)
-    this.state = { query: '', plantsChosen: {} }
+    this.state = { query: '', myPlants: {} }
   }
 
   static navigationOptions = ({ navigation }) => {
@@ -19,20 +19,22 @@ class Plants extends Component {
           placeholder="Search"
           onChangeText={query => navigation.setParams({ query })}
         />
-      )
+      ),
+      headerStyle: {
+        backgroundColor: '#356035'
+      },
+      headerTintColor: '#fff'
     }
   }
 
   componentDidMount = async () => {
     try {
-      await AsyncStorage.getItem('myPlants').then(myPlants => {
-        let plantsChosen = {}
-        for (let plant in plants) {
-          plantsChosen[plant] = myPlants ? plant in myPlants : false
-        }
-        this.setState({
-          plantsChosen
-        })
+      let myPlants = await AsyncStorage.getItem('myPlants')
+      if (myPlants === null) {
+        myPlants = '{}'
+      }
+      this.setState({
+        myPlants: JSON.parse(myPlants)
       })
     } catch (error) {
       console.log(error)
@@ -54,32 +56,49 @@ class Plants extends Component {
   }
 
   togglePlant = name => {
-    const prevChosen = this.state.plantsChosen
-    const newChosen = {
-      ...prevChosen,
-      [name]: !prevChosen[name]
+    const myUpdatedPlants = this.state.myPlants
+    if (name in myUpdatedPlants) {
+      delete myUpdatedPlants[name]
+    } else {
+      myUpdatedPlants[name] = plants[name]
     }
     this.setState({
-      plantsChosen: newChosen
+      myPlants: myUpdatedPlants
     })
+    console.log(this.state.myPlants)
+  }
+
+  saveAndBack = async () => {
+    try {
+      await AsyncStorage.setItem(
+        'myPlants',
+        JSON.stringify(this.state.myPlants)
+      ).then(() => this.props.navigation.goBack())
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   render() {
     return (
-      <FlatList
-        data={this.plantsList()}
-        renderItem={({ item }) => (
-          <View style={styles.plantContainer}>
-            <Text style={styles.plantName}>{item.name}</Text>
-            <CheckBox
-              onPress={() => {
-                this.togglePlant(item.name)
-              }}
-              checked={this.state.plantsChosen[item.name]}
-            />
-          </View>
-        )}
-      />
+      <View>
+        <FlatList
+          data={this.plantsList()}
+          renderItem={({ item }) => (
+            <View style={styles.plantContainer}>
+              <Text style={styles.plantName}>{item.name}</Text>
+              <CheckBox
+                onPress={() => {
+                  this.togglePlant(item.name)
+                }}
+                checked={item.name in this.state.myPlants}
+              />
+            </View>
+          )}
+          keyExtractor={(item, index) => index.toString()}
+        />
+        <Button title={'SAVE PLANTS'} onPress={() => this.saveAndBack()} />
+      </View>
     )
   }
 }
