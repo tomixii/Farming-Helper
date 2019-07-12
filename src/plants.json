@@ -1,26 +1,290 @@
 {
-  "snapdragon": {
-    "minutes": 80,
-    "name": "snapdragon"
+  "allotments": {
+    "potato": {
+      "minutes": 40,
+      "name": "potato"
+    },
+    "onion": {
+      "minutes": 40,
+      "name": "onion"
+    },
+    "cabbage": {
+      "minutes": 40,
+      "name": "cabbage"
+    },
+    "tomato": {
+      "minutes": 40,
+      "name": "tomato"
+    },
+    "sweetcorn": {
+      "minutes": 60,
+      "name": "sweetcorn"
+    },
+    "strawberry": {
+      "minutes": 60,
+      "name": "strawberry"
+    },
+    "watermelon": {
+      "minutes": 80,
+      "name": "watermelon"
+    },
+    "snape grass": {
+      "minutes": 70,
+      "name": "snape grass"
+    }
   },
-  "palm": {
-    "minutes": 960,
-    "name": "palm"
+  "flowers": {
+    "marigold": {
+      "minutes": 20,
+      "name": "marigold"
+    },
+    "rosemary": {
+      "minutes": 20,
+      "name": "rosemary"
+    },
+    "nasturtium": {
+      "minutes": 20,
+      "name": "nasturtium"
+    },
+    "woad": {
+      "minutes": 20,
+      "name": "woad"
+    },
+    "limpwurt": {
+      "minutes": 20,
+      "name": "limpwurt"
+    },
+    "white lily": {
+      "minutes": 20,
+      "name": "white lily"
+    }
   },
-  "calquat": {
-    "minutes": 1278,
-    "name": "calquat"
+  "herbs": {
+    "guam": {
+      "minutes": 80,
+      "name": "guam"
+    },
+    "marrentill": {
+      "minutes": 80,
+      "name": "marrentill"
+    },
+    "tarromin": {
+      "minutes": 80,
+      "name": "tarromin"
+    },
+    "gout tuber": {
+      "minutes": 80,
+      "name": "gout tuber"
+    },
+    "ranarr": {
+      "minutes": 80,
+      "name": "ranarr"
+    },
+    "toadflax": {
+      "minutes": 80,
+      "name": "toadflax"
+    },
+    "irit": {
+      "minutes": 80,
+      "name": "irit"
+    },
+    "avantoe": {
+      "minutes": 80,
+      "name": "avantoe"
+    },
+    "kwuarm": {
+      "minutes": 80,
+      "name": "kwuarm"
+    },
+    "snapdragon": {
+      "minutes": 80,
+      "name": "snapdragon"
+    },
+    "cadantine": {
+      "minutes": 80,
+      "name": "cadantine"
+    },
+    "lantadyme": {
+      "minutes": 80,
+      "name": "lantadyme"
+    },
+    "dwarf weed": {
+      "minutes": 80,
+      "name": "dwarf weed"
+    },
+    "torstol": {
+      "minutes": 80,
+      "name": "torstol"
+    }
   },
-  "mahogany": {
-    "minutes": 5120,
-    "name": "mahogany"
+  "hops": {
+    "barley": {
+      "minutes": 40,
+      "name": "barley"
+    },
+    "hammerstone": {
+      "minutes": 40,
+      "name": "hammerstone"
+    },
+    "asgarnian": {
+      "minutes": 50,
+      "name": "asgarnian"
+    },
+    "jute": {
+      "minutes": 50,
+      "name": "jute"
+    },
+    "yanillan": {
+      "minutes": 60,
+      "name": "yanillan"
+    },
+    "krandorian": {
+      "minutes": 70,
+      "name": "krandorian"
+    },
+    "wildblood": {
+      "minutes": 80,
+      "name": "wildblood"
+    }
   },
-  "celastrus": {
-    "minutes": 800,
-    "name": "celastrus"
+  "bushes": {
+    "redberry": {
+      "mintues": 100,
+      "name": "redberry"
+    },
+    "cadavaberry": {
+      "mintues": 120,
+      "name": "cadavaberry"
+    },
+    "dwellberry": {
+      "mintues": 140,
+      "name": "dwellberry"
+    },
+    "jangerberry": {
+      "mintues": 160,
+      "name": "jangerberry"
+    },
+    "whiteberry": {
+      "mintues": 160,
+      "name": "whiteberry"
+    },
+    "poison ivy berry": {
+      "mintues": 160,
+      "name": "poison ivy berry"
+    }
   },
-  "testikasvi": {
-    "minutes": 1,
-    "name": "testikasvi"
+  "trees": {
+    "oak": {
+      "minutes": 200,
+      "name": "oak"
+    },
+    "willow": {
+      "minutes": 280,
+      "name": "willow"
+    },
+    "maple": {
+      "minutes": 320,
+      "name": "maple"
+    },
+    "yew": {
+      "minutes": 400,
+      "name": "yew"
+    },
+    "magic": {
+      "minutes": 480,
+      "name": "magic"
+    }
+  },
+  "fruit trees": {
+    "apple": {
+      "minutes": 960,
+      "name": "apple"
+    },
+    "banana": {
+      "minutes": 960,
+      "name": "banana"
+    },
+    "orange": {
+      "minutes": 960,
+      "name": "orange"
+    },
+    "curry": {
+      "minutes": 960,
+      "name": "curry"
+    },
+    "pineapple": {
+      "minutes": 960,
+      "name": "pineapple"
+    },
+    "papaya": {
+      "minutes": 960,
+      "name": "papaya"
+    },
+    "palm": {
+      "minutes": 960,
+      "name": "palm"
+    },
+    "dragonfruit": {
+      "minutes": 960,
+      "name": "dragonfruit"
+    }
+  },
+  "special": {
+    "giant seaweed": {
+      "minutes": 40,
+      "name": "giant seaweed"
+    },
+    "teak": {
+      "minutes": 3840,
+      "name": "teak"
+    },
+    "grapes": {
+      "minutes": 35,
+      "name": "grapes"
+    },
+    "mushroom": {
+      "minutes": 240,
+      "name": "mushroom"
+    },
+    "mahogany": {
+      "minutes": 5120,
+      "name": "mahogany"
+    },
+    "cactus": {
+      "minutes": 560,
+      "name": "cactus"
+    },
+    "belladonna": {
+      "minutes": 320,
+      "name": "belladonna"
+    },
+    "potato cactus": {
+      "minutes": 70,
+      "name": "potato cactus"
+    },
+    "hespori": {
+      "minutes": 1920,
+      "name": "hespori"
+    },
+    "calquat": {
+      "minutes": 1280,
+      "name": "calquat"
+    },
+    "spirit tree": {
+      "minutes": 3840,
+      "name": "spirit tree"
+    },
+    "celastrus": {
+      "minutes": 800,
+      "name": "celastrus"
+    },
+    "redwood": {
+      "minutes": 6400,
+      "name": "redwood"
+    },
+    "testikasvi": {
+      "minutes": 1,
+      "name": "testikasvi"
+    }
   }
 }

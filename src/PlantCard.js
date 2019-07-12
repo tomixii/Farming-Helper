@@ -43,7 +43,7 @@ export default class Plant extends Component {
     } catch (error) {
       console.log(error)
     }
-    this.setState({ plantTime: time })
+    this.setState({ plantTime: DateTime.fromISO(time) })
   }
 
   parseMillis = timeInMilliSeconds => {
@@ -89,7 +89,12 @@ export default class Plant extends Component {
   render() {
     const { container, plantButton, nameText, timeText } = styles
     return (
-      <Card containerStyle={{ width: Dimensions.get('window').width - 30 }}>
+      <Card
+        containerStyle={{
+          width: Dimensions.get('window').width - 30,
+          elevation: 3
+        }}
+      >
         <View style={container}>
           <View>
             <Text style={nameText}>
@@ -101,7 +106,7 @@ export default class Plant extends Component {
             style={plantButton}
             color="#356035"
             onPress={() =>
-              this.setPlantTime(this.props.data.name, DateTime.local())
+              this.setPlantTime(this.props.data.name, DateTime.local().toISO())
             }
             title={'PLANT'}
           />

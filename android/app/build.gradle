@@ -93,7 +93,7 @@ def enableSeparateBuildPerCPUArchitecture = false
  */
 def enableProguardInReleaseBuilds = false
 
-def pass = getPassword("YOUR_USER_NAME","android_keystore")
+def pass = getPassword("tomixii","android_keystore")
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion

@@ -1,32 +1,51 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, TouchableOpacity } from 'react-native'
 import PlantCard from './PlantCard'
-import plants from './plants.json'
 import AsyncStorage from '@react-native-community/async-storage'
-import { SearchBar } from 'react-native-elements'
-import { createStackNavigator, createAppContainer } from 'react-navigation'
+import _ from 'lodash'
 
 class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {}
+    this.navigation = this.props.navigation
   }
 
-  static navigationOptions = {
-    title: 'My Plants',
-    headerStyle: {
-      backgroundColor: '#356035'
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold'
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'My Plants',
+      headerStyle: {
+        backgroundColor: '#356035'
+      },
+      headerRight: (
+        <TouchableOpacity onPress={navigation.getParam('navigatePlants')}>
+          <Text
+            style={{
+              color: '#fff',
+              fontSize: 40,
+              marginRight: 20,
+              marginBottom: 5
+            }}
+          >
+            +
+          </Text>
+        </TouchableOpacity>
+      ),
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold'
+      }
     }
   }
 
-  componentDidMount = () => {
+  componentDidMount = async () => {
     this.load()
     this.props.navigation.addListener('willFocus', this.load)
+    this.props.navigation.setParams({
+      navigatePlants: this.navigatePlants
+    })
   }
+
   load = async () => {
     try {
       await AsyncStorage.getItem('myPlants').then(myPlants => {
@@ -41,8 +60,12 @@ class Dashboard extends Component {
     }
   }
 
+  navigatePlants = () => {
+    this.props.navigation.navigate('Plants')
+  }
+
   renderPlants() {
-    if (this.state.myPlants) {
+    if (!_.isEmpty(this.state.myPlants)) {
       let plantsInJSX = []
       for (let key in this.state.myPlants) {
         if (this.state.myPlants.hasOwnProperty(key)) {
@@ -58,14 +81,11 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { navigate } = this.props.navigation
     return (
       <View style={styles.container}>
-        <ScrollView>{this.renderPlants()}</ScrollView>
-
-        <TouchableOpacity onPress={() => navigate('Plants')} style={styles.fab}>
-          <Text style={styles.fabIcon}>+</Text>
-        </TouchableOpacity>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          {this.renderPlants()}
+        </ScrollView>
       </View>
     )
   }
@@ -78,6 +98,9 @@ const styles = {
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
     flex: 1
+  },
+  scrollContainer: {
+    paddingBottom: 15
   },
   header: {
     fontSize: 40,
